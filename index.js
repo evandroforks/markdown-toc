@@ -68,6 +68,7 @@ function generate(options) {
         if (token.type === 'heading_open') {
           tokens[i].lvl = tokens[i - 1].hLevel;
           tokens[i].i = num++;
+          // console.log(`tok ${JSON.stringify(tokens[i])}`)
           arr.push(tokens[i]);
         }
       }
@@ -99,6 +100,7 @@ function generate(options) {
           tok.slug = utils.slugify(val, opts);
           res.json.push(utils.pick(tok, ['content', 'slug', 'lvl', 'i', 'seen']));
           if (opts.linkify) tok = linkify(tok, opts);
+          // console.log(`tok ${JSON.stringify(tok)}`)
           result.push(tok);
         }
       }
@@ -182,6 +184,7 @@ function highest(arr) {
  */
 
 function linkify(tok, options) {
+  // console.log('Before: ' + JSON.stringify(tok))
   var opts = utils.merge({}, options);
   if (tok && tok.content) {
     opts.num = tok.seen;
@@ -196,6 +199,7 @@ function linkify(tok, options) {
     }
     tok.content = utils.mdlink(text, '#' + slug);
   }
+  // console.log('After : ' + JSON.stringify(tok))
   return tok;
 }
 
@@ -246,6 +250,7 @@ function stripMarkdownLink(text) {
  */
 
 function titleize(str, opts) {
+  // console.log('Before: ' + str)
   if (opts && opts.strip) { return strip(str, opts); }
   if (opts && opts.titleize === false) return str;
   if (opts && typeof opts.titleize === 'function') {
@@ -254,6 +259,7 @@ function titleize(str, opts) {
   str = utils.getTitle(str);
   str = str.split(/<\/?[^>]+>/).join('');
   str = str.split(/[ \t]+/).join(' ');
+  // console.log('After : ' + str)
   return str.trim();
 }
 
@@ -268,6 +274,7 @@ function titleize(str, opts) {
 
 function strip(str, opts) {
   opts = opts || {};
+  // console.log('Before: ' + str)
   if (!opts.strip) return str;
   if (typeof opts.strip === 'function') {
     return opts.strip(str, opts);
@@ -278,6 +285,7 @@ function strip(str, opts) {
     str = str.trim().replace(re, '');
     return str.replace(/^-|-$/g, '');
   }
+  // console.log('After : ' + str)
   return str;
 }
 

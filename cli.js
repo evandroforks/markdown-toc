@@ -74,5 +74,7 @@ input.on('error', function onErr(err) {
 
 function output(parsed) {
   if (args.json) return console.log(JSON.stringify(parsed.json, null, '  '));
+    // console.log(`parsed ${JSON.stringify(parsed.json)}`);
+    // console.log(`parsed ${JSON.stringify(parsed.content)}`);
   process.stdout.write(parsed.content+'\n');
 }
