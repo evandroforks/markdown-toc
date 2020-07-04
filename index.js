@@ -193,7 +193,7 @@ function linkify(tok, options) {
 
     var slug = clearToken(slug, '#');
     var text = stripMarkdownLink(text);
-    slug = querystring.escape(slug);
+    // slug = querystring.escape(slug);
     if (opts && typeof opts.linkify === 'function') {
       return opts.linkify(tok, text, slug, opts);
     }
